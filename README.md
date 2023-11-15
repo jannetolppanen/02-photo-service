@@ -1,3 +1,6 @@
+28-30	13.11.2023	9-12	Db relations one-to-one	Lecture 28-30
+done
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
