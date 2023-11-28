@@ -37,6 +37,12 @@ export class UsersService {
   }
 
   async getUsers(): Promise<User[]> {
-    return await this.usersRepository.find({ relations: ['profile'] });
+    return await this.usersRepository.find({
+      relations: ['profile', 'photos'],
+    });
+  }
+
+  async findUserByEmail(email: string): Promise<User> {
+    return await this.usersRepository.findOne({ where: { email: email } });
   }
 }

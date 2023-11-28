@@ -1,4 +1,5 @@
-28-30	13.11.2023	9-12	Db relations one-to-one	Lecture 28-30
+31-33	20.11.2023	9-12	Many-to-One and Many-toMany	Lecture 31-33 part I
+Lecture 31-33 part II
 done
 
 <p align="center">
