@@ -14,14 +14,15 @@ export class PhotosService {
 
   // Search for a user by email address and if found, create a new photo
   async insertPhoto(createPhotoDto: CreatePhotoDto): Promise<Photo> {
-    const user = await this.usersService.findUserByEmail(
-      createPhotoDto.user_email,
+    const user = await this.usersService.findUserByUsername(
+      // search with email address because CreatePhotoDto uses email address
+      createPhotoDto.username,
     );
 
     if (!user) {
       throw new NotFoundException('User not found');
     }
-    console.log(`insertPhoto user found ${user.email}`);
+    console.log(`insertPhoto user found ${user.username}`);
 
     // TODO: Add categories to photo item
     const photo = new Photo();

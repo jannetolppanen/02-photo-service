@@ -1,7 +1,8 @@
 export class CreateUserWithEmbeddedProfileDto {
+  username: string;
+  password: string;
   firstName: string;
   lastName: string;
-  email: string;
   profile: {
     gender: string;
     photo: string;

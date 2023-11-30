@@ -14,19 +14,23 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ unique: true })
+  username: string;
+
+  @Column()
+  password: string;
+
   @Column()
   firstName: string;
 
   @Column()
   lastName: string;
 
-  @Column({ unique: true })
-  email: string;
-
+  // optional because of the `?` symbol
   @OneToOne(() => Profile, (profile) => profile.user)
   @JoinColumn()
-  profile: Profile;
+  profile?: Profile;
 
   @OneToMany(() => Photo, (photo) => photo.user)
-  photos: Photo[];
+  photos?: Photo[];
 }

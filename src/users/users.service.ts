@@ -14,9 +14,10 @@ export class UsersService {
   ) {}
   insertUser(createUserDto: CreateUserDto): Promise<User> {
     const user = new User();
+    user.username = createUserDto.username;
+    user.password = createUserDto.password;
     user.firstName = createUserDto.firstName;
     user.lastName = createUserDto.lastName;
-    user.email = createUserDto.email;
     return this.usersRepository.save(user);
   }
 
@@ -28,9 +29,10 @@ export class UsersService {
       createUserWithEmbeddedProfileDto.profile.photo,
     );
     const user = new User();
+    user.username = createUserWithEmbeddedProfileDto.username;
+    user.password = createUserWithEmbeddedProfileDto.password;
     user.firstName = createUserWithEmbeddedProfileDto.firstName;
     user.lastName = createUserWithEmbeddedProfileDto.lastName;
-    user.email = createUserWithEmbeddedProfileDto.email;
     user.profile = profile;
     console.log(`saving ${JSON.stringify(user)}`);
     return this.usersRepository.save(user);
@@ -42,7 +44,9 @@ export class UsersService {
     });
   }
 
-  async findUserByEmail(email: string): Promise<User> {
-    return await this.usersRepository.findOne({ where: { email: email } });
+  async findUserByUsername(username: string): Promise<User> {
+    return await this.usersRepository.findOne({
+      where: { username: username },
+    });
   }
 }

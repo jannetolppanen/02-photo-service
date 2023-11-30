@@ -1,5 +1,5 @@
-31-33	20.11.2023	9-12	Many-to-One and Many-toMany	Lecture 31-33 part I
-Lecture 31-33 part II
+34-36	27.11.2023	9-12	Authentication	Lecture 34-37 part I
+Lecture 34-37 part II
 done
 
 <p align="center">
