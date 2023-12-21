@@ -49,4 +49,8 @@ export class UsersService {
       where: { username: username },
     });
   }
+
+  async findUserById(id: string): Promise<User> {
+    return await this.usersRepository.findOneBy({ id: parseInt(id) });
+  }
 }

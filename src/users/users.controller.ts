@@ -1,7 +1,8 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { CreateUserWithEmbeddedProfileDto } from './dto/create-user-with-embedded-profile';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -27,6 +28,8 @@ export class UsersController {
   }
 
   @Get()
+  // lisäämällä useguardsin mihin tahansa endpointtiin saa käytttöön jwt:n
+  @UseGuards(JwtAuthGuard)
   async getUsers(): Promise<User[]> {
     return await this.usersService.getUsers();
   }
