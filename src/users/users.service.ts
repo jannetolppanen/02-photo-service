@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CreateUserWithEmbeddedProfileDto } from './dto/create-user-with-embedded-profile';
 import { ProfilesService } from 'src/profiles/profiles.service';
 
@@ -51,6 +51,11 @@ export class UsersService {
   }
 
   async findUserById(id: string): Promise<User> {
-    return await this.usersRepository.findOneBy({ id: parseInt(id) });
+    const result = await this.usersRepository.findOneBy({ id: parseInt(id) });
+    return result;
+  }
+
+  async deleteUser(user: User): Promise<DeleteResult> {
+    return await this.usersRepository.delete(user);
   }
 }
