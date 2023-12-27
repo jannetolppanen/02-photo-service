@@ -45,7 +45,6 @@ export class UsersController {
   async getUserById(@Param('id') id: string): Promise<User> {
     console.log(id);
     const user = await this.usersService.findUserById(id);
-    console.log(`getUserById: ${JSON.stringify(user)}`);
     if (!user) {
       throw new Error('user not found');
     }
@@ -54,9 +53,7 @@ export class UsersController {
 
   @Delete('/:id')
   async deleteUser(@Param('id') id: string): Promise<DeleteResult> {
-    console.log(id);
     const user = await this.usersService.findUserById(id);
-    console.log(`deleteUser: ${JSON.stringify(user)}`);
     if (!user) {
       throw new Error('user not found');
     }

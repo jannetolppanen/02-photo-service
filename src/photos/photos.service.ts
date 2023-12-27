@@ -36,4 +36,26 @@ export class PhotosService {
   async getPhotos(): Promise<Photo[]> {
     return this.photosRepository.find({ relations: ['user'] });
   }
+
+  async findPhotoById(id: string): Promise<Photo> {
+    const result = await this.photosRepository.findOne({
+      where: { id: parseInt(id) },
+      relations: ['user'],
+    });
+    return result;
+  }
+
+  async findPhotosByName(name: string): Promise<Photo[]> {
+    console.log('trigger');
+    const result = await this.photosRepository.find({
+      where: { name: name },
+      relations: ['user'],
+    });
+    console.log(`findPhotosByName: ${JSON.stringify(result)}`);
+    return result;
+  }
+
+  async deletePhoto(photo: Photo): Promise<Photo> {
+    return await this.photosRepository.remove(photo);
+  }
 }
