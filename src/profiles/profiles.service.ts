@@ -15,7 +15,7 @@ export class ProfilesService {
     console.log(`saving profile ${JSON.stringify(profile)}`);
     return await this.profilesRepository.save(profile);
   }
-  async getAllProfiles(): Promise<Profile[]> {
-    return this.profilesRepository.find();
-  }
+  // async getAllProfiles(): Promise<Profile[]> {
+  //   return this.profilesRepository.find();
+  // }
 }
