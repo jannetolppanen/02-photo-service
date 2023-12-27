@@ -11,12 +11,19 @@ import { PhotosService } from './photos.service';
 import { Photo } from './entities/photo.entity';
 import { CreatePhotoDto } from './dto/create-photo.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 
 @Controller('photos')
 export class PhotosController {
   constructor(private photosService: PhotosService) {}
 
   @Post()
+  @ApiOperation({ summary: 'Post a new photo' })
+  @ApiParam({
+    name: 'name',
+    description: 'description',
+  })
+  @ApiResponse({ status: 200, description: 'Posted photo', type: Photo })
   async createPhotoUsingEmail(
     @Body() createPhotoDto: CreatePhotoDto,
   ): Promise<Photo> {
