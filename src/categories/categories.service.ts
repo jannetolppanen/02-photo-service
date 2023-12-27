@@ -19,7 +19,12 @@ export class CategoriesService {
     category.description = createCategoryDto.description;
     return await this.categoriesRepository.save(category);
   }
+
   async getCategories(): Promise<Category[]> {
-    return this.categoriesRepository.find();
+    return await this.categoriesRepository.find();
+  }
+
+  async findCategoryById(id: number): Promise<Category> {
+    return await this.categoriesRepository.findOne({ where: { id: id } });
   }
 }

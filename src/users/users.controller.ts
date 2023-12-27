@@ -69,10 +69,18 @@ export class UsersController {
     if (!user) {
       throw new Error('user not found');
     }
-    user.username = updateUserDto.username;
-    user.password = updateUserDto.password;
-    user.firstName = updateUserDto.firstName;
-    user.lastName = updateUserDto.lastName;
+    if (updateUserDto.username) {
+      user.username = updateUserDto.username;
+    }
+    if (updateUserDto.password) {
+      user.password = updateUserDto.password;
+    }
+    if (updateUserDto.firstName) {
+      user.firstName = updateUserDto.firstName;
+    }
+    if (updateUserDto.lastName) {
+      user.lastName = updateUserDto.lastName;
+    }
     return await this.usersService.updateUser(user);
   }
 }

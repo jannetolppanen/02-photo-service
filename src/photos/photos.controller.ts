@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { PhotosService } from './photos.service';
@@ -12,6 +13,7 @@ import { Photo } from './entities/photo.entity';
 import { CreatePhotoDto } from './dto/create-photo.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
+import { UpdatePhotoDto } from './dto/update-photo.dto';
 
 @Controller('photos')
 export class PhotosController {
@@ -53,5 +55,28 @@ export class PhotosController {
       throw new Error('photo not found');
     }
     return await this.photosService.deletePhoto(photo);
+  }
+  @Put('/:id')
+  async updatePhoto(
+    @Param('id') id: string,
+    @Body() updatePhotoDto: UpdatePhotoDto,
+  ): Promise<Photo> {
+    const photo = await this.photosService.findPhotoById(id);
+    if (!photo) {
+      console.log(`updatePhoto: photo not found`);
+      throw new Error('photo not found');
+    }
+
+    if (updatePhotoDto.name) {
+      photo.name = updatePhotoDto.name;
+    }
+    if (updatePhotoDto.description) {
+      photo.description = updatePhotoDto.description;
+    }
+    if (updatePhotoDto.url) {
+      photo.url = updatePhotoDto.url;
+    }
+
+    return await this.photosService.updatePhoto(photo);
   }
 }

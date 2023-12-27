@@ -4,6 +4,7 @@ import { Photo } from './entities/photo.entity';
 import { Repository } from 'typeorm';
 import { CreatePhotoDto } from './dto/create-photo.dto';
 import { UsersService } from 'src/users/users.service';
+import { UpdatePhotoDto } from './dto/update-photo.dto';
 
 @Injectable()
 export class PhotosService {
@@ -57,5 +58,9 @@ export class PhotosService {
 
   async deletePhoto(photo: Photo): Promise<Photo> {
     return await this.photosRepository.remove(photo);
+  }
+
+  async updatePhoto(photo: Photo): Promise<Photo> {
+    return await this.photosRepository.save(photo);
   }
 }
