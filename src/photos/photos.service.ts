@@ -57,7 +57,7 @@ export class PhotosService {
   async findPhotoById(id: string): Promise<Photo> {
     const result = await this.photosRepository.findOne({
       where: { id: parseInt(id) },
-      relations: ['user'],
+      relations: ['user', 'categories'],
     });
     return result;
   }
