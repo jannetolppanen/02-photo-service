@@ -20,7 +20,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async createUserWithEmbeddedProfile(
     @Body() createUserWithEmbeddedProfileDto: CreateUserWithEmbeddedProfileDto,
   ): Promise<User> {
@@ -52,6 +52,7 @@ export class UsersController {
   }
 
   @Delete('/:id')
+  @UseGuards(JwtAuthGuard)
   async deleteUser(@Param('id') id: string): Promise<DeleteResult> {
     const user = await this.usersService.findUserById(id);
     if (!user) {
@@ -61,6 +62,7 @@ export class UsersController {
   }
   // update user information
   @Put('/:id')
+  @UseGuards(JwtAuthGuard)
   async updateUser(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,

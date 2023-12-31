@@ -20,6 +20,7 @@ export class PhotosController {
   constructor(private photosService: PhotosService) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Post a new photo' })
   @ApiParam({
     name: 'name',
@@ -48,6 +49,7 @@ export class PhotosController {
   }
 
   @Delete('/:id')
+  @UseGuards(JwtAuthGuard)
   async deletePhoto(@Param('id') id: string): Promise<Photo> {
     const photo = await this.photosService.findPhotoById(id);
     if (!photo) {
@@ -57,6 +59,7 @@ export class PhotosController {
     return await this.photosService.deletePhoto(photo);
   }
   @Put('/:id')
+  @UseGuards(JwtAuthGuard)
   async updatePhoto(
     @Param('id') id: string,
     @Body() updatePhotoDto: UpdatePhotoDto,
